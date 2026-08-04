@@ -1,0 +1,108 @@
+{
+  "name": "playwright-trace-player",
+  "version": "1.0.0",
+  "description": "Replay Playwright trace screenshots in any browser, with a small React player included.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Mendy Landa",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MendyLanda/playwright-trace-player.git"
+  },
+  "homepage": "https://trace-player.mendylanda.com",
+  "bugs": {
+    "url": "https://github.com/MendyLanda/playwright-trace-player/issues"
+  },
+  "keywords": [
+    "playwright",
+    "trace",
+    "trace-viewer",
+    "react",
+    "browser",
+    "test"
+  ],
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    },
+    "./trace-worker.js": "./dist/trace-worker.js",
+    "./styles.css": "./dist/styles.css"
+  },
+  "main": "./dist/core.js",
+  "module": "./dist/core.js",
+  "types": "./dist/core.d.ts",
+  "scripts": {
+    "build": "tsup && cp src/react/player.css dist/styles.css",
+    "build:demo": "vite build --config demo/vite.config.ts",
+    "check:worker-build": "tsx scripts/check-worker-build.ts",
+    "deploy:demo": "npm run build:demo && wrangler deploy",
+    "dev": "vite --config demo/vite.config.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm test && npm run build && npm run build:demo && npm run check:worker-build",
+    "prepack": "npm run build && npm run check:worker-build",
+    "prepublishOnly": "npm run typecheck && npm test",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
+    "version:major": "npm version major --no-git-tag-version",
+    "make:demo-trace": "tsx scripts/make-demo-trace.ts"
+  },
+  "dependencies": {
+    "fflate": "^0.8.2"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^22.17.0",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "@vitejs/plugin-react": "^6.0.5",
+    "jsdom": "^29.1.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tsx": "^4.20.3",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vite": "^8.2.0",
+    "vitest": "^4.1.10",
+    "wrangler": "^4.118.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "overrides": {
+    "esbuild": "^0.28.1",
+    "undici": "7.29.0"
+  }
+}
