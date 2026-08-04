@@ -245,7 +245,7 @@ export function App() {
       <section className="hero" id="top">
         <div className="hero-copy">
           <p className="overline">PLAYWRIGHT / BROWSER / REPLAY</p>
-          <h1>See the failure.<br />Skip the download.</h1>
+          <h1>See every run.<br />Skip the download.</h1>
           <p className="lede">
             Turn a Playwright trace URL into a video-like replay inside your product. No server, ffmpeg, or video export.
           </p>
@@ -334,7 +334,7 @@ export function App() {
       <section className="install" id="install">
         <div>
           <p className="overline">TWO IMPORTS. ONE PROP.</p>
-          <h2>Drop it where the failure belongs.</h2>
+          <h2>Drop it into your product.</h2>
           <p>The core only reads the trace screenshots. Your trace stays in the browser.</p>
         </div>
         <div className="code-card install-card">

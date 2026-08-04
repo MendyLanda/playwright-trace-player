@@ -1,6 +1,6 @@
 # Playwright Trace Player
 
-Replay a Playwright trace as a video-like view in the browser. Pass a trace URL to the React component and place it next to the failed run.
+Replay any Playwright trace as a video-like view in the browser. Pass a trace URL to the React component to review or share any run.
 
 The package reads the screencast frames that Playwright already stores in `trace.zip`. It needs no server process, ffmpeg, video export, or Playwright runtime. It keeps screenshots compressed until playback reaches them and holds only a small set of image URLs, so large traces do not expand all at once.
 
@@ -18,7 +18,7 @@ npm install playwright-trace-player
 import { PlaywrightTracePlayer } from 'playwright-trace-player/react'
 import 'playwright-trace-player/styles.css'
 
-export function FailedRun({ traceUrl }: { traceUrl: string }) {
+export function TraceReplay({ traceUrl }: { traceUrl: string }) {
   return (
     <PlaywrightTracePlayer
       traceUrl={traceUrl}
@@ -28,7 +28,7 @@ export function FailedRun({ traceUrl }: { traceUrl: string }) {
 }
 ```
 
-The player has play, pause, seek, speed, keyboard, and full-screen controls. Its display settings can show Playwright commands, recorded cursor movement, click markers, keyboard input, browser details, and the failed state.
+The player has play, pause, seek, speed, keyboard, and full-screen controls. Its display settings can show Playwright commands, recorded cursor movement, click markers, keyboard input, browser details, and the trace result.
 
 ### Props
 
@@ -154,13 +154,13 @@ const trace = await loadTrace(traceUrl, {
 
 ## Record usable traces
 
-Playwright must save screenshots in the trace. The test runner does this for its normal trace modes:
+Playwright must save screenshots in the trace. The test runner does this for its normal trace modes. Use `on` to record every run, or choose another mode that fits your retention policy:
 
 ```ts
 // playwright.config.ts
 export default defineConfig({
   use: {
-    trace: 'retain-on-failure',
+    trace: 'on',
   },
 })
 ```
@@ -186,7 +186,7 @@ Large traces use more browser memory because the player unzips their screencast 
 
 ## What this is not
 
-This package replays screenshots. It does not render an MP4, rebuild an interactive DOM, or show the full network and source panels from Playwright Trace Viewer. It aims to answer one quick question: “What did the failed automation do?”
+This package replays screenshots. It does not render an MP4, rebuild an interactive DOM, or show the full network and source panels from Playwright Trace Viewer. It aims to answer one quick question: “What happened during this run?”
 
 ## Credit
 

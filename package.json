@@ -1,6 +1,6 @@
 {
   "name": "playwright-trace-player",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Replay Playwright trace screenshots in any browser, with a small React player included.",
   "type": "module",
   "license": "MIT",
